@@ -1,4 +1,4 @@
-INSERT INTO country (iso_code, name, creation_timestamp, modification_timestamp, version_number) 
+INSERT INTO country (iso_code, name, creation_timestamp, modification_timestamp, version_number)
 VALUES ('AR','ARGENTINA', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 1);
 
 INSERT INTO country (iso_code, name, creation_timestamp, modification_timestamp, version_number) 

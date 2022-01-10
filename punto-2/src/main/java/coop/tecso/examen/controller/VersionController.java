@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/version")
 public class VersionController {
-	
-	@Autowired
-	BuildProperties buildProperties;
-	
+
+	final BuildProperties buildProperties;
+
+    public VersionController(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
+
     @GetMapping("/number")
     public ResponseEntity<?> getVersion() {
     	
