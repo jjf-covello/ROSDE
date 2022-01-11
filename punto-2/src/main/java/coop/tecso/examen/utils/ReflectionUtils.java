@@ -30,9 +30,9 @@ public class ReflectionUtils {
     }
 
     public static Moneda getMonedaInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
-        return (Moneda) getConstructorByClass(getClassByName("coop.tecso.examen.model.cc.moneda.",name)).newInstance();
+        return name == null ? null : (Moneda) getConstructorByClass(getClassByName("coop.tecso.examen.model.cc.moneda.",name)).newInstance();
     }
     public static TipoMovimiento getTipomovInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
-        return (TipoMovimiento) getConstructorByClass(getClassByName("coop.tecso.examen.model.movimiento.tipo.",name)).newInstance();
+        return name == null ? null : (TipoMovimiento) getConstructorByClass(getClassByName("coop.tecso.examen.model.movimiento.tipo.",name)).newInstance();
     }
 }

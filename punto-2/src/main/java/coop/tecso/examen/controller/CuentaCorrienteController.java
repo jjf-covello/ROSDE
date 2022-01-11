@@ -7,8 +7,11 @@ import coop.tecso.examen.service.CuentaCorrienteService;
 import coop.tecso.examen.service.PersonaFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Map;
 
 @RestController
@@ -19,31 +22,68 @@ public class CuentaCorrienteController {
     private CuentaCorrienteService cuentaCorrienteService;
 
     @GetMapping("")
-    public Page<CuentaCorrienteDTO> getAllCuentas(@RequestParam Integer page, @RequestParam Integer pageSize) {
-        return cuentaCorrienteService.getAllCuentas(page, pageSize).map(CuentaCorrienteDTO::GenerateFrom);
+    public ResponseEntity<Object> getAllCuentas(@RequestParam Integer page,
+                                                @RequestParam Integer pageSize) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    cuentaCorrienteService.getAllCuentas(page, pageSize).map(CuentaCorrienteDTO::GenerateFrom));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Collections.singletonMap("Error", "Ocurrío un error, Intente nuevamente más tarde."));
+        }
     }
 
     @PutMapping("/{nro}")
-    public void putCC(@PathVariable(value = "nro") String nro, @RequestBody Map<String, String> cc) {
-        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
-        cuentaCorrienteService.actualizarCC(nro, dto);
+    public ResponseEntity putCC(@PathVariable(value = "nro") String nro,
+                                @RequestBody Map<String, String> cc) {
+        try {
+            CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+            cuentaCorrienteService.actualizarCC(nro, dto);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    Collections.singletonMap("Status: ", "200. Operación Completada"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Collections.singletonMap("Error", "Ocurrío un error, Intente nuevamente más tarde."));
+        }
     }
 
     @DeleteMapping("/{nro}")
-    public void deleteCC(@PathVariable(value = "nro") String nro) {
-        cuentaCorrienteService.deleteByNro(nro);
+    public ResponseEntity deleteCC(@PathVariable(value = "nro") String nro) {
+        try {
+            cuentaCorrienteService.deleteByNro(nro);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    Collections.singletonMap("Status: ", "200. Operación Completada"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Collections.singletonMap("Error", "Ocurrío un error, Intente nuevamente más tarde."));
+        }
     }
 
     @PatchMapping("/{nro}")
-    public void patchCC(@PathVariable(value = "nro") String nro, @RequestBody Map<String, String> cc) {
-        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
-        cuentaCorrienteService.editarCC(dto, nro);
+    public ResponseEntity patchCC(@PathVariable(value = "nro") String nro,
+                                  @RequestBody Map<String, String> cc) {
+        try {
+            CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+            cuentaCorrienteService.editarCC(dto, nro);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    Collections.singletonMap("Status: ", "200. Operación Completada"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Collections.singletonMap("Error", "Ocurrío un error, Intente nuevamente más tarde."));
+        }
     }
 
     @PostMapping("/")
-    public void createCC(@RequestBody Map<String, String> cc) {
-        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
-        cuentaCorrienteService.create(dto);
+    public ResponseEntity createCC(@RequestBody Map<String, String> cc) {
+        try {
+            CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+            cuentaCorrienteService.create(dto);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    Collections.singletonMap("Status: ", "200. Operación Completada"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Collections.singletonMap("Error", "Ocurrío un error, Intente nuevamente más tarde."));
+        }
     }
 
     private CuentaCorrienteDTO obtenerDTODesdeMap(Map<String, String> cc) {

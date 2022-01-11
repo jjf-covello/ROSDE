@@ -1,8 +1,10 @@
 package coop.tecso.examen.dto.movimientos;
 
 import coop.tecso.examen.model.cc.CuentaCorriente;
+import coop.tecso.examen.model.cc.moneda.Moneda;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CuentaCorrienteDTO {
@@ -60,6 +62,7 @@ public class CuentaCorrienteDTO {
         this.moneda = moneda;
     }
     public static CuentaCorrienteDTO GenerateFrom(CuentaCorriente cc) {
+        Optional<Moneda> puedeSerMoneda = Optional.ofNullable(cc.getMoneda());
         return new CuentaCorrienteDTO(
                 cc.getMovimientos()
                         .stream()
@@ -67,7 +70,7 @@ public class CuentaCorrienteDTO {
                         .collect(Collectors.toList()),
                 cc.getSaldo().toString(),
                 cc.getNro(),
-                cc.getMoneda().getClass().getSimpleName()
+                puedeSerMoneda.map(moneda -> moneda.getClass().getSimpleName()).orElse(null)
         );
     }
 }

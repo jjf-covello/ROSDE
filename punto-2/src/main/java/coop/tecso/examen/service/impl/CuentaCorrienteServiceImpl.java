@@ -66,9 +66,13 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
 
     private void cambiarValor(CuentaCorriente ccOld, CuentaCorrienteDTO cc) {
             ccOld.setNro(cc.getNro());
-            ccOld.setSaldo(new BigDecimal(cc.getSaldo()));
+            ccOld.setSaldo(new BigDecimal(cc.getSaldo() == null ? "0.00" : cc.getSaldo()));
             try {
-                ccOld.setMoneda(getMonedaInstaceFromClassName(cc.getMoneda()));
+                if( cc.getMoneda() != null ){
+                    ccOld.setMoneda(getMonedaInstaceFromClassName(cc.getMoneda()));
+                } else {
+                    ccOld.setMoneda(null);
+                }
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -77,13 +81,13 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
     private void cambiarValorSiEsDiferente(CuentaCorriente ccOld, CuentaCorrienteDTO cc) {
         //FIXME esto podria hacer con Fields para no tener tantos ifs pero termino comparando IDs y puede terminar en vulnerabilidad
         //Los movimientos no pueden cambiar por eso se queda fuera de este metodo
-        if(!cc.getNro().equals(ccOld.getNro())){
+        if(!(cc.getNro() == null) && !cc.getNro().equals(ccOld.getNro())){
             ccOld.setNro(cc.getNro());
         }
-        if(!cc.getSaldo().equals(ccOld.getSaldo().toString())){
+        if(!(cc.getSaldo() == null) && !cc.getSaldo().equals(ccOld.getSaldo().toString())){
             ccOld.setSaldo(new BigDecimal(cc.getSaldo()));
         }
-        if(!cc.getMoneda().equals(ccOld.getMoneda().getClass().getName())){
+        if(!(cc.getMoneda() == null) && !cc.getMoneda().equals(ccOld.getMoneda().getClass().getName())){
             try {
                 ccOld.setMoneda(getMonedaInstaceFromClassName(cc.getMoneda()));
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
