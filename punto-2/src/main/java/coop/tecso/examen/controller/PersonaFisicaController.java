@@ -1,11 +1,7 @@
 package coop.tecso.examen.controller;
 
 import coop.tecso.examen.dto.PersonaFisicaDTO;
-import coop.tecso.examen.dto.PersonaJuridicaDTO;
-import coop.tecso.examen.dto.TitularDTO;
-import coop.tecso.examen.model.PersonaFisica;
 import coop.tecso.examen.service.PersonaFisicaService;
-import coop.tecso.examen.service.TitularService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

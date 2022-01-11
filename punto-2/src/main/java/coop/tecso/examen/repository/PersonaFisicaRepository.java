@@ -1,9 +1,6 @@
 package coop.tecso.examen.repository;
 
-import coop.tecso.examen.model.PersonaFisica;
-import coop.tecso.examen.model.Titular;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import coop.tecso.examen.model.titular.PersonaFisica;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

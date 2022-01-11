@@ -1,4 +1,6 @@
-package coop.tecso.examen.model;
+package coop.tecso.examen.model.titular;
+
+import coop.tecso.examen.model.AbstractPersistentObject;
 
 import javax.persistence.*;
 

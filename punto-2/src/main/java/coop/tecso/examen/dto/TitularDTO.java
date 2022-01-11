@@ -1,6 +1,6 @@
 package coop.tecso.examen.dto;
 
-import coop.tecso.examen.model.Titular;
+import coop.tecso.examen.model.titular.Titular;
 
 public class TitularDTO {
     private String RUT;

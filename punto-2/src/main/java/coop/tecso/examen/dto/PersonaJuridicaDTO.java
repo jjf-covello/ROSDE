@@ -1,6 +1,6 @@
 package coop.tecso.examen.dto;
 
-import coop.tecso.examen.model.PersonaJuridica;
+import coop.tecso.examen.model.titular.PersonaJuridica;
 
 public class PersonaJuridicaDTO {
 

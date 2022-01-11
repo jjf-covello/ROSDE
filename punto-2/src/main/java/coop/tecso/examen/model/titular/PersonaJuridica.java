@@ -1,4 +1,4 @@
-package coop.tecso.examen.model;
+package coop.tecso.examen.model.titular;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

@@ -1,10 +1,9 @@
 package coop.tecso.examen.service.impl;
 
 import coop.tecso.examen.dto.PersonaFisicaDTO;
-import coop.tecso.examen.model.PersonaFisica;
+import coop.tecso.examen.model.titular.PersonaFisica;
 import coop.tecso.examen.repository.PersonaFisicaRepository;
 import coop.tecso.examen.service.PersonaFisicaService;
-import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

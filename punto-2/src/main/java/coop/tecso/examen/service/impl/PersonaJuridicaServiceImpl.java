@@ -1,7 +1,7 @@
 package coop.tecso.examen.service.impl;
 
 import coop.tecso.examen.dto.PersonaJuridicaDTO;
-import coop.tecso.examen.model.PersonaJuridica;
+import coop.tecso.examen.model.titular.PersonaJuridica;
 import coop.tecso.examen.repository.PersonaJuridicaRepository;
 import coop.tecso.examen.service.PersonaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;

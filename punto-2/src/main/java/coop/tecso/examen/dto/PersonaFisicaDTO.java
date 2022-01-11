@@ -1,6 +1,6 @@
 package coop.tecso.examen.dto;
 
-import coop.tecso.examen.model.PersonaFisica;
+import coop.tecso.examen.model.titular.PersonaFisica;
 
 public class PersonaFisicaDTO {
 

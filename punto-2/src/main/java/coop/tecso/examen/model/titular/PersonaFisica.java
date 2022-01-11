@@ -1,4 +1,4 @@
-package coop.tecso.examen.model;
+package coop.tecso.examen.model.titular;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -25,6 +25,8 @@ public class PersonaFisica extends Titular {
         this.CC = cc;
         this.RUT = rut;
     }
+
+    public PersonaFisica(){}
 
     public String getNombre() {
         return nombre;
