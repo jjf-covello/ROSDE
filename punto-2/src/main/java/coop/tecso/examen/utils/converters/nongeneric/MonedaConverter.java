@@ -7,8 +7,7 @@ import javax.persistence.Converter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static coop.tecso.examen.utils.ReflectionUtils.getClassByName;
-import static coop.tecso.examen.utils.ReflectionUtils.getConstructorByClass;
+import static coop.tecso.examen.utils.ReflectionUtils.*;
 
 @Converter
 public class MonedaConverter implements AttributeConverter<Moneda, String> {
@@ -18,19 +17,16 @@ public class MonedaConverter implements AttributeConverter<Moneda, String> {
         if (mov == null) {
             return null;
         }
-        return mov.getClass().getName();
+        return mov.getClass().getSimpleName();
     }
 
     @Override
-    public Moneda convertToEntityAttribute(String movName) {
+    public Moneda convertToEntityAttribute(String name) {
         Moneda object = null;
-        if (!(movName == null || movName.isEmpty())) {
-            Class<?> clazz = getClassByName(movName);
-            Constructor<?> ctor = getConstructorByClass(clazz);
+        if (!(name == null || name.isEmpty())) {
             try {
-                assert ctor != null;
-                object = (Moneda) ctor.newInstance();
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                object = getMonedaInstaceFromClassName(name);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }

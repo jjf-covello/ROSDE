@@ -22,6 +22,12 @@ public class CuentaCorrienteDTO {
         this.moneda = moneda;
     }
 
+    public CuentaCorrienteDTO(String saldo, String nro, String moneda) {
+        this.saldo = saldo;
+        this.nro = nro;
+        this.moneda = moneda;
+    }
+
     public List<MovimientoDTO> getMovimientos() {
         return movimientos;
     }

@@ -2,7 +2,6 @@ package coop.tecso.examen.service.impl;
 
 import coop.tecso.examen.dto.movimientos.CuentaCorrienteDTO;
 import coop.tecso.examen.model.cc.CuentaCorriente;
-import coop.tecso.examen.model.cc.moneda.Moneda;
 import coop.tecso.examen.model.exception.ExcepcionAplicativo;
 import coop.tecso.examen.repository.CuentaCorrienteRepository;
 import coop.tecso.examen.service.CuentaCorrienteService;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
-import static coop.tecso.examen.utils.ReflectionUtils.getInstaceFromClassName;
+import static coop.tecso.examen.utils.ReflectionUtils.getMonedaInstaceFromClassName;
 
 @Service
 public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
@@ -29,9 +28,9 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
     @Override
     public void deleteByNro(String nro) {
         if(contarMovimeintos(nro)>0){
-            repository.deleteByNro(nro);
-        } else {
             throw new ExcepcionAplicativo("La cuenta que trata de eliminar tiene movimientos.");
+        } else {
+            repository.deleteByNro(nro);
         }
 
     }
@@ -40,7 +39,7 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
     public void create(CuentaCorrienteDTO cc) {
         try {
             repository.save(new CuentaCorriente(new BigDecimal(cc.getSaldo())
-                    , cc.getNro(), (Moneda) getInstaceFromClassName(cc.getMoneda())
+                    , cc.getNro(), getMonedaInstaceFromClassName(cc.getMoneda())
             ));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
@@ -69,7 +68,7 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
             ccOld.setNro(cc.getNro());
             ccOld.setSaldo(new BigDecimal(cc.getSaldo()));
             try {
-                ccOld.setMoneda((Moneda) getInstaceFromClassName(cc.getMoneda()));
+                ccOld.setMoneda(getMonedaInstaceFromClassName(cc.getMoneda()));
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -86,7 +85,7 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
         }
         if(!cc.getMoneda().equals(ccOld.getMoneda().getClass().getName())){
             try {
-                ccOld.setMoneda((Moneda) getInstaceFromClassName(cc.getMoneda()));
+                ccOld.setMoneda(getMonedaInstaceFromClassName(cc.getMoneda()));
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }

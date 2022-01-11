@@ -2,7 +2,7 @@ package coop.tecso.examen.model.movimiento;
 
 import coop.tecso.examen.model.AbstractPersistentObject;
 import coop.tecso.examen.model.cc.CuentaCorriente;
-import coop.tecso.examen.model.movimiento.tipos.TipoMovimiento;
+import coop.tecso.examen.model.movimiento.tipo.TipoMovimiento;
 import coop.tecso.examen.utils.converters.nongeneric.TipoMovimientoConverter;
 
 import javax.persistence.*;

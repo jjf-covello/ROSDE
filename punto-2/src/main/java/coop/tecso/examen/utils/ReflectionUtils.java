@@ -1,5 +1,8 @@
 package coop.tecso.examen.utils;
 
+import coop.tecso.examen.model.cc.moneda.Moneda;
+import coop.tecso.examen.model.movimiento.tipo.TipoMovimiento;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -8,7 +11,7 @@ public class ReflectionUtils {
         Constructor<?> ctor = null;
         try {
             assert clazz != null;
-            ctor = clazz.getConstructor(String.class);
+            ctor = clazz.getConstructor();
 
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -16,17 +19,20 @@ public class ReflectionUtils {
         return ctor;
     }
 
-    public static Class<?> getClassByName(String name) {
+    public static Class<?> getClassByName(String prefix, String name) {
         Class<?> clazz = null;
         try {
-            clazz = Class.forName(name);
+            clazz = Class.forName(prefix + name);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return clazz;
     }
 
-    public static  Object getInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
-        return getConstructorByClass(getClassByName(name)).newInstance();
+    public static Moneda getMonedaInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        return (Moneda) getConstructorByClass(getClassByName("coop.tecso.examen.model.cc.moneda.",name)).newInstance();
+    }
+    public static TipoMovimiento getTipomovInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        return (TipoMovimiento) getConstructorByClass(getClassByName("coop.tecso.examen.model.movimiento.tipo.",name)).newInstance();
     }
 }

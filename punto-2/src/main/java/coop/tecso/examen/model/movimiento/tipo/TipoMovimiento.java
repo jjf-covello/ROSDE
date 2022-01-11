@@ -1,4 +1,4 @@
-package coop.tecso.examen.model.movimiento.tipos;
+package coop.tecso.examen.model.movimiento.tipo;
 
 import coop.tecso.examen.model.cc.CuentaCorriente;
 import coop.tecso.examen.model.exception.ExcepcionAplicativo;

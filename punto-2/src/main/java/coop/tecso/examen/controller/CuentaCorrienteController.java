@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/cc")
 public class CuentaCorrienteController {
@@ -21,23 +23,29 @@ public class CuentaCorrienteController {
         return cuentaCorrienteService.getAllCuentas(page, pageSize).map(CuentaCorrienteDTO::GenerateFrom);
     }
 
-    @PutMapping("/:rut")
+    @PutMapping("/:nro")
     public void putCC(@RequestParam("nro") String nro, @RequestParam("cc") CuentaCorrienteDTO cc) {
         cuentaCorrienteService.actualizarCC(nro, cc);
     }
 
     @DeleteMapping("/:nro")
-    public void deleteCC(@RequestParam String nro) {
+    public void deleteCC(@RequestParam("nro") String nro) {
         cuentaCorrienteService.deleteByNro(nro);
     }
 
     @PatchMapping("/:nro")
-    public void patchPersonaFisica(@RequestParam("nro") String nro, @RequestParam("cc") CuentaCorrienteDTO cc) {
+    public void patchCC(@RequestParam("nro") String nro, @RequestParam("cc") CuentaCorrienteDTO cc) {
         cuentaCorrienteService.editarCC(cc, nro);
     }
 
     @PostMapping("/")
-    public void createCC(@RequestParam("cc") CuentaCorrienteDTO cc) {
-        cuentaCorrienteService.create(cc);
+    public void createCC(@RequestBody Map<String, String> cc) {
+        cuentaCorrienteService.create(
+                new CuentaCorrienteDTO(
+                        cc.get("saldo"),
+                        cc.get("nro"),
+                        cc.get("moneda")
+                )
+        );
     }
 }

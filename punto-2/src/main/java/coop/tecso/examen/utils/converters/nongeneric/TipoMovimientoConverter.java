@@ -1,14 +1,12 @@
 package coop.tecso.examen.utils.converters.nongeneric;
 
-import coop.tecso.examen.model.movimiento.tipos.TipoMovimiento;
+import coop.tecso.examen.model.movimiento.tipo.TipoMovimiento;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static coop.tecso.examen.utils.ReflectionUtils.getClassByName;
-import static coop.tecso.examen.utils.ReflectionUtils.getConstructorByClass;
+import static coop.tecso.examen.utils.ReflectionUtils.getTipomovInstaceFromClassName;
 
 @Converter
 public class TipoMovimientoConverter implements AttributeConverter<TipoMovimiento, String> {
@@ -18,23 +16,19 @@ public class TipoMovimientoConverter implements AttributeConverter<TipoMovimient
         if (mov == null) {
             return null;
         }
-        return mov.getClass().getName();
+        return mov.getClass().getSimpleName();
     }
 
     @Override
-    public TipoMovimiento convertToEntityAttribute(String movName) {
+    public TipoMovimiento convertToEntityAttribute(String name) {
         TipoMovimiento object = null;
-        if (!(movName == null || movName.isEmpty())) {
-            Class<?> clazz = getClassByName(movName);
-            Constructor<?> ctor = getConstructorByClass(clazz);
+        if (!(name == null || name.isEmpty())) {
             try {
-                assert ctor != null;
-                object = (TipoMovimiento) ctor.newInstance();
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                object = getTipomovInstaceFromClassName(name);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-
         return object;
     }
 
