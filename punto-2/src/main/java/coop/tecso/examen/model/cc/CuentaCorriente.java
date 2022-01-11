@@ -3,7 +3,7 @@ package coop.tecso.examen.model.cc;
 import coop.tecso.examen.model.AbstractPersistentObject;
 import coop.tecso.examen.model.cc.moneda.Moneda;
 import coop.tecso.examen.model.movimiento.Movimiento;
-import coop.tecso.examen.utils.converters.ClazzConverter;
+import coop.tecso.examen.utils.converters.nongeneric.MonedaConverter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -81,7 +81,4 @@ public class CuentaCorriente extends AbstractPersistentObject {
         this.movimientos = new ArrayList<>();
     }
 
-    private static class MonedaConverter extends ClazzConverter<Moneda> {
-
-    }
 }

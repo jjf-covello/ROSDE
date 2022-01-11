@@ -9,12 +9,14 @@ import coop.tecso.examen.service.CuentaCorrienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
 import static coop.tecso.examen.utils.ReflectionUtils.getInstaceFromClassName;
 
+@Service
 public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
     @Autowired
     private CuentaCorrienteRepository repository;
