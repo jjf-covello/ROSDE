@@ -1,7 +1,9 @@
 package coop.tecso.examen.model.cc;
 
 import coop.tecso.examen.model.AbstractPersistentObject;
+import coop.tecso.examen.model.cc.moneda.Moneda;
 import coop.tecso.examen.model.movimiento.Movimiento;
+import coop.tecso.examen.utils.converters.ClazzConverter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,8 +22,7 @@ public class CuentaCorriente extends AbstractPersistentObject {
     @Column(name = "numero_cuenta", unique = true, nullable = false)
     private String nro;
 
-    @Column(name="moneda")
-    @Embedded
+    @Convert(converter = MonedaConverter.class)
     private Moneda moneda;
 
     public List<Movimiento> getMovimientos() {
@@ -54,5 +55,15 @@ public class CuentaCorriente extends AbstractPersistentObject {
 
     public void setMoneda(Moneda moneda) {
         this.moneda = moneda;
+    }
+
+    public void agregarMovimiento(Movimiento mov) {
+        getMoneda().verificarGiro(this,mov);
+        mov.aplicar(this,mov);
+        this.movimientos.add(mov);
+    }
+
+    private static class MonedaConverter extends ClazzConverter<Moneda> {
+
     }
 }

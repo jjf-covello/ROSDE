@@ -3,7 +3,7 @@ package coop.tecso.examen.model.movimiento;
 import coop.tecso.examen.model.AbstractPersistentObject;
 import coop.tecso.examen.model.cc.CuentaCorriente;
 import coop.tecso.examen.model.movimiento.tipos.TipoMovimiento;
-import coop.tecso.examen.utils.TipoMovimientoConverter;
+import coop.tecso.examen.utils.converters.ClazzConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -81,5 +81,13 @@ public class Movimiento extends AbstractPersistentObject {
     }
 
     public Movimiento() {
+    }
+
+    public void aplicar(CuentaCorriente cuentaCorriente, Movimiento mov) {
+        getTipoMovimiento().aplicarMovimiento(cuentaCorriente,mov);
+    }
+
+    private static class TipoMovimientoConverter extends ClazzConverter<TipoMovimiento>{
+
     }
 }
