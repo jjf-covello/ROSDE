@@ -1,6 +1,6 @@
 package coop.tecso.examen.service;
 
-import coop.tecso.examen.dto.PersonaJuridicaDTO;
+import coop.tecso.examen.dto.titular.PersonaJuridicaDTO;
 import org.springframework.data.domain.Page;
 
 public interface PersonaJuridicaService {

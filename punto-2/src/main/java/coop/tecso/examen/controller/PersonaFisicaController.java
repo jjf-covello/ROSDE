@@ -1,6 +1,6 @@
 package coop.tecso.examen.controller;
 
-import coop.tecso.examen.dto.PersonaFisicaDTO;
+import coop.tecso.examen.dto.titular.PersonaFisicaDTO;
 import coop.tecso.examen.service.PersonaFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

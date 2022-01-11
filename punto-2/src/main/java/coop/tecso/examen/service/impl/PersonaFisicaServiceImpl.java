@@ -1,6 +1,6 @@
 package coop.tecso.examen.service.impl;
 
-import coop.tecso.examen.dto.PersonaFisicaDTO;
+import coop.tecso.examen.dto.titular.PersonaFisicaDTO;
 import coop.tecso.examen.model.titular.PersonaFisica;
 import coop.tecso.examen.repository.PersonaFisicaRepository;
 import coop.tecso.examen.service.PersonaFisicaService;

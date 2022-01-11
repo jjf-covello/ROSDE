@@ -1,7 +1,6 @@
 package coop.tecso.examen.service;
 
-import coop.tecso.examen.dto.PersonaFisicaDTO;
-import coop.tecso.examen.dto.TitularDTO;
+import coop.tecso.examen.dto.titular.PersonaFisicaDTO;
 import org.springframework.data.domain.Page;
 
 public interface PersonaFisicaService {

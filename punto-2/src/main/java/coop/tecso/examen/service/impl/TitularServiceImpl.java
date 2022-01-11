@@ -1,6 +1,6 @@
 package coop.tecso.examen.service.impl;
 
-import coop.tecso.examen.dto.TitularDTO;
+import coop.tecso.examen.dto.titular.TitularDTO;
 import coop.tecso.examen.repository.TitularRepository;
 import coop.tecso.examen.service.TitularService;
 import org.springframework.beans.factory.annotation.Autowired;

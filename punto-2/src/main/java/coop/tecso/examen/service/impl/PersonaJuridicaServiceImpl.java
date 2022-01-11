@@ -1,6 +1,6 @@
 package coop.tecso.examen.service.impl;
 
-import coop.tecso.examen.dto.PersonaJuridicaDTO;
+import coop.tecso.examen.dto.titular.PersonaJuridicaDTO;
 import coop.tecso.examen.model.titular.PersonaJuridica;
 import coop.tecso.examen.repository.PersonaJuridicaRepository;
 import coop.tecso.examen.service.PersonaJuridicaService;

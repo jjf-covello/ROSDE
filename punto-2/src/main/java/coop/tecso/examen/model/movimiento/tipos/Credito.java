@@ -9,7 +9,6 @@ public class Credito extends TipoMovimiento {
 
     @Override
     public void aplicarMovimiento(CuentaCorriente cc, Movimiento mov) {
-        validarSaldoMovimiento(mov);
         cc.setSaldo(cc.getSaldo().setScale(2, BigDecimal.ROUND_HALF_UP)
                 .add(mov.getImporte().setScale(2, BigDecimal.ROUND_HALF_UP))
         );

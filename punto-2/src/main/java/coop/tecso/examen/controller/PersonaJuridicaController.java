@@ -1,7 +1,7 @@
 package coop.tecso.examen.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import coop.tecso.examen.dto.PersonaJuridicaDTO;
+import coop.tecso.examen.dto.titular.PersonaJuridicaDTO;
 import coop.tecso.examen.service.PersonaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

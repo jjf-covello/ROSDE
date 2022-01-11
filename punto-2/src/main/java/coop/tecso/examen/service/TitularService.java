@@ -1,6 +1,6 @@
 package coop.tecso.examen.service;
 
-import coop.tecso.examen.dto.TitularDTO;
+import coop.tecso.examen.dto.titular.TitularDTO;
 import org.springframework.data.domain.Page;
 
 public interface TitularService {

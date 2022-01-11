@@ -7,6 +7,7 @@ import coop.tecso.examen.utils.converters.ClazzConverter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -61,6 +62,23 @@ public class CuentaCorriente extends AbstractPersistentObject {
         getMoneda().verificarGiro(this,mov);
         mov.aplicar(this,mov);
         this.movimientos.add(mov);
+    }
+
+    public CuentaCorriente() {
+    }
+
+    public CuentaCorriente(List<Movimiento> movimientos, BigDecimal saldo, String nro, Moneda moneda) {
+        this.movimientos = movimientos;
+        this.saldo = saldo;
+        this.nro = nro;
+        this.moneda = moneda;
+    }
+
+    public CuentaCorriente(BigDecimal saldo, String nro, Moneda moneda) {
+        this.saldo = saldo;
+        this.nro = nro;
+        this.moneda = moneda;
+        this.movimientos = new ArrayList<>();
     }
 
     private static class MonedaConverter extends ClazzConverter<Moneda> {

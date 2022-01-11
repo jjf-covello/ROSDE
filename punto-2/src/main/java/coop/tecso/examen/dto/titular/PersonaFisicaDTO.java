@@ -1,4 +1,4 @@
-package coop.tecso.examen.dto;
+package coop.tecso.examen.dto.titular;
 
 import coop.tecso.examen.model.titular.PersonaFisica;
 

@@ -1,6 +1,7 @@
 package coop.tecso.examen.utils;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ReflectionUtils {
     public static  Constructor<?> getConstructorByClass(Class<?> clazz) {
@@ -15,13 +16,17 @@ public class ReflectionUtils {
         return ctor;
     }
 
-    public static Class<?> getClassByName(String movName) {
+    public static Class<?> getClassByName(String name) {
         Class<?> clazz = null;
         try {
-            clazz = Class.forName(movName);
+            clazz = Class.forName(name);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return clazz;
+    }
+
+    public static  Object getInstaceFromClassName(String name) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        return getConstructorByClass(getClassByName(name)).newInstance();
     }
 }
