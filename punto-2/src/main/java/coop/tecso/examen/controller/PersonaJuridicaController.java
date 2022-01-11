@@ -19,8 +19,8 @@ public class PersonaJuridicaController {
         return personaJuridicaService.getAllTitulars(page, pageSize);
     }
 
-    @PutMapping("/:rut")
-    public void putPersonaJuridica(@RequestParam("rut")String rut, @RequestParam("newRut")String newRut) {
+    @PutMapping("/{rut}")
+    public void putPersonaJuridica(@PathVariable("rut")String rut, @RequestParam("newRut")String newRut) {
         personaJuridicaService.changeRUT(rut, newRut);
     }
     @PostMapping("/")
@@ -31,13 +31,13 @@ public class PersonaJuridicaController {
                 payload.findValue("RUT").asText()));
     }
 
-    @DeleteMapping("/:rut")
-    public void deletePersonaJuridica(@RequestParam String rut) {
+    @DeleteMapping("/{rut}")
+    public void deletePersonaJuridica(@PathVariable("rut") String rut) {
         personaJuridicaService.deleteByRUT(rut);
     }
 
-    @PatchMapping("/:rut")
-    public void patchPersonaJuridica(@RequestParam("rut")String rut, @RequestParam("newRut")String newRut) {
+    @PatchMapping("/{rut}")
+    public void patchPersonaJuridica(@PathVariable("rut")String rut, @RequestParam("newRut")String newRut) {
         personaJuridicaService.changeRUT(rut, newRut);
     }
 }

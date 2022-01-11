@@ -18,34 +18,38 @@ public class CuentaCorrienteController {
     @Autowired
     private CuentaCorrienteService cuentaCorrienteService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public Page<CuentaCorrienteDTO> getAllCuentas(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return cuentaCorrienteService.getAllCuentas(page, pageSize).map(CuentaCorrienteDTO::GenerateFrom);
     }
 
-    @PutMapping("/:nro")
-    public void putCC(@RequestParam("nro") String nro, @RequestParam("cc") CuentaCorrienteDTO cc) {
-        cuentaCorrienteService.actualizarCC(nro, cc);
+    @PutMapping("/{nro}")
+    public void putCC(@PathVariable(value = "nro") String nro, @RequestBody Map<String, String> cc) {
+        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+        cuentaCorrienteService.actualizarCC(nro, dto);
     }
 
-    @DeleteMapping("/:nro")
-    public void deleteCC(@RequestParam("nro") String nro) {
+    @DeleteMapping("/{nro}")
+    public void deleteCC(@PathVariable(value = "nro") String nro) {
         cuentaCorrienteService.deleteByNro(nro);
     }
 
-    @PatchMapping("/:nro")
-    public void patchCC(@RequestParam("nro") String nro, @RequestParam("cc") CuentaCorrienteDTO cc) {
-        cuentaCorrienteService.editarCC(cc, nro);
+    @PatchMapping("/{nro}")
+    public void patchCC(@PathVariable(value = "nro") String nro, @RequestBody Map<String, String> cc) {
+        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+        cuentaCorrienteService.editarCC(dto, nro);
     }
 
     @PostMapping("/")
     public void createCC(@RequestBody Map<String, String> cc) {
-        cuentaCorrienteService.create(
-                new CuentaCorrienteDTO(
-                        cc.get("saldo"),
-                        cc.get("nro"),
-                        cc.get("moneda")
-                )
-        );
+        CuentaCorrienteDTO dto = obtenerDTODesdeMap(cc);
+        cuentaCorrienteService.create(dto);
+    }
+
+    private CuentaCorrienteDTO obtenerDTODesdeMap(Map<String, String> cc) {
+        return new CuentaCorrienteDTO(
+                cc.get("saldo"),
+                cc.get("nro"),
+                cc.get("moneda"));
     }
 }

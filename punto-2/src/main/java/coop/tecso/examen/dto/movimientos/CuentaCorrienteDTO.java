@@ -67,7 +67,7 @@ public class CuentaCorrienteDTO {
                         .collect(Collectors.toList()),
                 cc.getSaldo().toString(),
                 cc.getNro(),
-                cc.getMoneda().getClass().getName()
+                cc.getMoneda().getClass().getSimpleName()
         );
     }
 }

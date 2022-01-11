@@ -18,18 +18,18 @@ public class TitularController {
         return titularService.getAllTitulars(Math.max(0,page-1), Math.max(1, pageSize));
     }
 
-    @PutMapping("/:rut")
-    public void putTitular(@RequestParam("rut")String rut, @RequestParam("newRut")String newRut) {
+    @PutMapping("/{rut}")
+    public void putTitular(@PathVariable("rut")String rut, @RequestParam("newRut")String newRut) {
         titularService.changeRUT(rut, newRut);
     }
 
-    @DeleteMapping("/:rut")
-    public void deleteTitular(@RequestParam String rut) {
+    @DeleteMapping("/{rut}")
+    public void deleteTitular(@PathVariable("rut") String rut) {
         titularService.deleteByRUT(rut);
     }
 
-    @PatchMapping("/:rut")
-    public void patchtitular(@RequestParam("rut")String rut, @RequestParam("newRut")String newRut) {
+    @PatchMapping("/{rut}")
+    public void patchtitular(@PathVariable("rut")String rut, @RequestParam("newRut")String newRut) {
         titularService.changeRUT(rut, newRut);
     }
 }
