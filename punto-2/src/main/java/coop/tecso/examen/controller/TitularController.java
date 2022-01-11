@@ -15,7 +15,7 @@ public class TitularController {
 
     @GetMapping("/")
     public Page<TitularDTO> getAllTitulares(@RequestParam Integer page, @RequestParam Integer pageSize) {
-        return titularService.getAllTitulars(page, pageSize);
+        return titularService.getAllTitulars(Math.max(0,page-1), Math.max(1, pageSize));
     }
 
     @PutMapping("/:rut")
