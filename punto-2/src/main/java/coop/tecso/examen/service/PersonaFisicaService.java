@@ -8,7 +8,9 @@ public interface PersonaFisicaService {
 
     void deleteByRUT(String rut);
 
-    void changeRUT(String rut, String newRut);
-
     void create(PersonaFisicaDTO persona);
+
+    void modificarSiHayCambios(String rut, PersonaFisicaDTO dto);
+
+    void modificar(String rut, PersonaFisicaDTO dto);
 }

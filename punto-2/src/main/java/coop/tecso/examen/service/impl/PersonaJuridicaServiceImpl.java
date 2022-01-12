@@ -1,6 +1,7 @@
 package coop.tecso.examen.service.impl;
 
 import coop.tecso.examen.dto.titular.PersonaJuridicaDTO;
+import coop.tecso.examen.model.titular.PersonaFisica;
 import coop.tecso.examen.model.titular.PersonaJuridica;
 import coop.tecso.examen.repository.PersonaJuridicaRepository;
 import coop.tecso.examen.service.PersonaJuridicaService;
@@ -30,8 +31,38 @@ public class PersonaJuridicaServiceImpl implements PersonaJuridicaService {
     }
 
     @Override
-    public void changeRUT(String rut, String newRut) {
-        repository.changeRut(rut, newRut);
+    public void actualizar(String rut, PersonaJuridicaDTO nuevosDatos){
+        PersonaJuridica JuridicaDesactualizada = repository.findByRut(rut);
+        cambiarValor(JuridicaDesactualizada, nuevosDatos);
+        repository.save(JuridicaDesactualizada);
+    }
+
+    private void cambiarValor(PersonaJuridica juridicaDesactualizada, PersonaJuridicaDTO nuevosDatos) {
+        juridicaDesactualizada.setRazonSocial(nuevosDatos.getRazonSocial());
+        juridicaDesactualizada.setAnioFundacion(Date.valueOf(nuevosDatos.getAnioFundacion()));
+        juridicaDesactualizada.setRUT(nuevosDatos.getRUT());
+    }
+
+    @Override
+    public void modificar(String rut, PersonaJuridicaDTO nuevosDatos){
+        PersonaJuridica JuridicaDesactualizada = repository.findByRut(rut);
+        cambiarValorSiHayModificacion(JuridicaDesactualizada, nuevosDatos);
+        repository.save(JuridicaDesactualizada);
+    }
+
+    private void cambiarValorSiHayModificacion(PersonaJuridica juridicaDesactualizada, PersonaJuridicaDTO nuevosDatos) {
+        if((juridicaDesactualizada.getRazonSocial()!=null) &&
+                !(juridicaDesactualizada.getRazonSocial().equals(nuevosDatos.getRazonSocial()))){
+            juridicaDesactualizada.setRazonSocial(nuevosDatos.getRazonSocial());
+        }
+        if((nuevosDatos.getAnioFundacion()!=null) &&
+                !(Date.valueOf(nuevosDatos.getAnioFundacion()).equals(juridicaDesactualizada.getAnioFundacion()))){
+            juridicaDesactualizada.setAnioFundacion(Date.valueOf(nuevosDatos.getAnioFundacion()));
+        }
+        if((juridicaDesactualizada.getRUT()!=null) &&
+                !(juridicaDesactualizada.getRUT().equals(nuevosDatos.getRUT()))){
+            juridicaDesactualizada.setRUT(nuevosDatos.getRUT());
+        }
     }
 
     @Override

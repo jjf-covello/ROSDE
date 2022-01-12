@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 
+//TO FIX --> usar un flag de activo para manejar bajas logicas
 public interface PersonaFisicaRepository extends JpaRepository<PersonaFisica, Long> {
 
     @Modifying
@@ -15,9 +16,6 @@ public interface PersonaFisicaRepository extends JpaRepository<PersonaFisica, Lo
     @Query("DELETE FROM PersonaFisica t WHERE t.RUT = :rut")
     void deleteByRUT(@Param("rut") String rut);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE PersonaFisica SET RUT = :newRut WHERE RUT = :rut")
-    void changeRut(@Param("rut") String rut, @Param("newRut") String newRut);
-
+    @Query("SELECT pf FROM PersonaFisica pf WHERE pf.RUT=:rut")
+    PersonaFisica findByRut(@Param("rut") String rut);
 }

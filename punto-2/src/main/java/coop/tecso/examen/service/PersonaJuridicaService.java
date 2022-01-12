@@ -8,7 +8,9 @@ public interface PersonaJuridicaService {
 
     void deleteByRUT(String rut);
 
-    void changeRUT(String rut, String newRut);
-
     void create(PersonaJuridicaDTO persona);
+
+    void actualizar(String rut, PersonaJuridicaDTO dto);
+
+    void modificar(String rut, PersonaJuridicaDTO dto);
 }
