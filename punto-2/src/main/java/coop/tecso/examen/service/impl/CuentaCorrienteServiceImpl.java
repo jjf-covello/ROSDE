@@ -1,15 +1,19 @@
 package coop.tecso.examen.service.impl;
 
 import coop.tecso.examen.dto.movimientos.CuentaCorrienteDTO;
+import coop.tecso.examen.dto.movimientos.MovimientoDTO;
 import coop.tecso.examen.model.cc.CuentaCorriente;
 import coop.tecso.examen.model.exception.ExcepcionAplicativo;
+import coop.tecso.examen.model.movimiento.Movimiento;
 import coop.tecso.examen.repository.CuentaCorrienteRepository;
 import coop.tecso.examen.service.CuentaCorrienteService;
+import coop.tecso.examen.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
@@ -20,9 +24,31 @@ public class CuentaCorrienteServiceImpl implements CuentaCorrienteService {
     @Autowired
     private CuentaCorrienteRepository repository;
 
+    @Autowired
+    private MovimientoService movimientoService;
+
     @Override
     public Page<CuentaCorriente> getAllCuentas(Integer page, Integer pageSize) {
         return repository.findAll(PageRequest.of(page, pageSize));
+    }
+
+    @Override
+    public Page<Movimiento> getMovsPorCuenta(String nro, Integer page, Integer pageSize){
+        return repository.findMovsPorNroCC(nro,PageRequest.of(page, pageSize));
+    }
+
+    @Override
+    public CuentaCorriente getCuenta(String nro){
+        return repository.findByNro(nro);
+    }
+
+    @Override
+    @Transactional
+    public void crearYAgregarMovimiento(String nro, MovimientoDTO dto){
+        CuentaCorriente cc = repository.findByNro(nro);
+        Movimiento mov = movimientoService.createFromDTO(cc, dto);
+        cc.agregarMovimiento(mov);
+        repository.save(cc);
     }
 
     @Override

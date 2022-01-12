@@ -59,7 +59,6 @@ public class CuentaCorriente extends AbstractPersistentObject {
     }
 
     public void agregarMovimiento(Movimiento mov) {
-        getMoneda().verificarGiro(this,mov);
         mov.aplicar(this,mov);
         this.movimientos.add(mov);
     }

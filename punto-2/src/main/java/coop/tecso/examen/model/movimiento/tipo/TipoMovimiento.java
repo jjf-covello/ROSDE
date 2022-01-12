@@ -10,7 +10,7 @@ public abstract class TipoMovimiento {
     protected void validarSaldoMovimiento(Movimiento mov){
         BigDecimal extraccion = mov.getImporte();
         if(extraccion.signum()<0){
-            throw new ExcepcionAplicativo("El valor dle movimiento " +
+            throw new ExcepcionAplicativo("El valor del movimiento " +
                     mov.getDescripcion() + " es invalido-");
         }
     }

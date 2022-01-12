@@ -13,6 +13,6 @@ public abstract class Moneda {
 
     protected Boolean superaTope(CuentaCorriente cc, Movimiento mov){
         BigDecimal aux = cc.getSaldo().subtract(mov.getImporte());
-        return aux.compareTo(valorMaximoAlDescubierto)<0;
+        return aux.compareTo(valorMaximoAlDescubierto.negate())<0;
     }
 }
